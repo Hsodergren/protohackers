@@ -1,0 +1,3 @@
+(executable
+ (name prime)
+ (libraries eio eio_main yojson))
