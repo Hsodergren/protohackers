@@ -1,0 +1,4 @@
+(executable
+ (name means)
+ (libraries eio eio_main cstruct)
+ (preprocess (pps ppx_cstruct)))
