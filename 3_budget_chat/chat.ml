@@ -45,6 +45,8 @@ let server stream =
   let module M = Map.Make (Name) in
   let send string conn =
     try Flow.copy_string string conn with Invalid_argument _ -> ()
+    (* gets Invalid argument if a connection closes wile sending,
+       can happen if for example two connections close at the same time *)
   in
   let rec loop state =
     let users =
