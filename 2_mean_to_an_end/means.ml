@@ -30,7 +30,7 @@ end
 
 let handle_conn conn =
   let msg = Cstruct.create Raw_Msg.sizeof_t in
-  let ret_buf = Bytes.make 4 'a' in
+  let ret_buf = Bytes.create 4 in
   let rec loop state =
     Flow.read_exact conn msg;
     match Msg.of_raw msg with
