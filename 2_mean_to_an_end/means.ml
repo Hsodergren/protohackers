@@ -10,21 +10,11 @@ module Msg = struct
     | Query of { min : int; max : int }
 
   let of_raw raw =
+    let f1 = Int32.to_int @@ Raw_Msg.get_t_f1 raw in
+    let f2 = Int32.to_int @@ Raw_Msg.get_t_f2 raw in
     match Raw_Msg.get_t_typ raw with
-    | 'I' ->
-        Some
-          (Insert
-             {
-               time = Int32.to_int @@ Raw_Msg.get_t_f1 raw;
-               price = Int32.to_int @@ Raw_Msg.get_t_f2 raw;
-             })
-    | 'Q' ->
-        Some
-          (Query
-             {
-               min = Int32.to_int @@ Raw_Msg.get_t_f1 raw;
-               max = Int32.to_int @@ Raw_Msg.get_t_f2 raw;
-             })
+    | 'I' -> Some (Insert { time = f1; price = f2 })
+    | 'Q' -> Some (Query { min = f1; max = f2 })
     | _ -> None
 end
 
