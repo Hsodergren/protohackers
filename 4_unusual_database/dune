@@ -1,0 +1,3 @@
+(executable
+ (name db)
+ (libraries eio eio_main))
