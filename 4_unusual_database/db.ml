@@ -28,9 +28,7 @@ let main net =
         | Set ("version", _) -> ()
         | Set (k, v) -> Hashtbl.add table k v
         | Access k ->
-            let v =
-              match Hashtbl.find_opt table k with Some v -> v | None -> ""
-            in
+            let v = Option.value (Hashtbl.find_opt table k) ~default:"" in
             let msg = Cstruct.of_string (Fmt.str "%s=%s" k v) in
             Net.send socket addr msg
       done)

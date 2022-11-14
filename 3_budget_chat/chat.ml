@@ -49,12 +49,6 @@ let server stream =
        can happen if for example two connections close at the same time *)
   in
   let rec loop state =
-    let users =
-      M.bindings state
-      |> List.map (fun a -> Name.to_string (fst a))
-      |> String.concat ", "
-    in
-    traceln "users = %s" users;
     match Stream.take stream with
     | `Join (name, conn) ->
         traceln "join %a" Name.pp name;
@@ -83,7 +77,6 @@ let server stream =
         let state = M.remove name state in
         M.to_seq state
         |> Seq.iter (fun (_, conn) ->
-               (* Fmt.pr "writing to %a%!\n" Name.pp n; *)
                send (Fmt.str "* %a left the room\n" Name.pp name) conn);
         loop state
   in
