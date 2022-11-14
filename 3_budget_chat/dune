@@ -1,0 +1,3 @@
+(executable
+ (name chat)
+ (libraries eio eio_main))
