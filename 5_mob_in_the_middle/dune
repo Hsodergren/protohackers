@@ -1,0 +1,3 @@
+(executable
+ (name mob)
+ (libraries eio eio_main))
