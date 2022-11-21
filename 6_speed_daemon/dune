@@ -1,0 +1,3 @@
+(executable
+ (name speed)
+ (libraries eio eio_main))
